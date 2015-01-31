@@ -1,0 +1,285 @@
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+
+void cargarVector(int vect[],int n);
+void mostrarVector(int vect[],int n);
+int frecuencia(int vect[],int n,int elem);
+void eliminarElem(int vect[],int &n,int elem);
+int busquedalineal(int vect[],int n,int elem);
+void sumarvectores(int vect[],int vect2[],int vect3[],int n);
+void invertir(int vect2[],int n);
+void ordenarVector (int vect[], int n);
+void posicion (int vect[],int &n,int num);
+void recorrer(int vect[],int n);
+void ejercicio7(int n);
+void ejercicio8(int n);
+void ejercicio9(int n);
+int sumaDig(int n);
+int invertir(int n);
+
+int main()
+{
+    int n,vect[30],vect2[30],vect3[30],opc,elem,a;
+    do{
+        cout<<endl<<"\t\t\t\t***MENU***";
+        cout<<endl<<"1.CARGAR VECTOR: ";
+        cout<<endl<<"2.MOSTRAR VECTOR: ";
+        cout<<endl<<"3.ELIMINAR UN ELEMENTO : ";
+        cout<<endl<<"4.CALCULAR FRECUENCIA: ";
+        cout<<endl<<"5.BUSQUEDA SECUENCIAL: ";
+        cout<<endl<<"6.SUMA DE DOS VECTORES: ";
+        cout<<endl<<"7.INSERTAR DE MANERA ORDENADALOS ELEMENTOS A UN VECTOR";
+        cout<<endl<<"8.COLOCAR EL PRIMER ELEMENTO DEL VECTOR AL FINAL";
+        cout<<endl<<"9.Vector automtico 7";
+        cout<<endl<<"10.Vector automtico 8";
+        cout<<endl<<"11.Vector automtico 9";
+        cout<<endl<<"0.SALIR ";
+        cout<<endl<<"\n\nELEGIR UNA OPCION.. ";
+        cin>>opc;
+        switch(opc){
+            case 1 : cout<<"\n\n*Introducir el numero de elementos: ";
+                cin>>n;
+                cargarVector(vect,n);
+                break;
+           case 2 : mostrarVector(vect,n);
+                 break;
+
+           case 3 : cout<<"Introducir numero de elemento : ";
+                 cin>>elem;
+                 eliminarElem(vect,n,elem);
+                 break;
+          case 4 : cout<<"\n*Introducir elementos de su repeticion\n: ";
+               cin>>elem;
+               cout<<"\n*El resultado de la verificacion es\n: "<<frecuencia(vect,n,elem);
+          case 5 : cout<<"\n*Introducir el elemento que esta buscando.. \n: ";
+               cin>>elem;
+               cout<<"\n*El elemento que esta buscando esta en la posicion..\n: "<<busquedalineal(vect,n,elem);
+               break;
+          case 6 : cout<<"Ingrese el tamano de los dos vectores: ";
+               cin>>n;
+               cout<<"cargar el primer vector: "<<endl;
+               cargarVector(vect,n);
+               cout<<"cargar el segundo vector: "<<endl;
+               cargarVector(vect2,n);
+               invertir(vect2,n);
+               cout<< "resultado es: "<<endl;
+               sumarvectores(vect,vect2,vect3,n);
+               mostrarVector(vect3,n);
+               break;
+          case 7:cout<<"Ingrese el tamano del vector: ";
+              cin>>n;
+              cargarVector(vect,n);
+              ordenarVector(vect,n);
+              mostrarVector(vect,n);
+              do{
+                  cout<<"Ingrese un entero: ";
+                  cin>>num;
+                  posicion(vect,n,num);
+                  mostrear(vect,n);
+              }while(n==0);
+              break;
+          case 8:cout<<"Ingrese el tamano del vector: ";
+              cin>>n;
+              cargarVector(vect,n);
+              mostrarVector(vect,n);
+              recorrer(vect,n);
+              cout<<endl;
+              mostrarVector(vect,n);
+              break;
+          case 9:cout<<"Ingrese el tamano del vector: ";
+              cin>>n;
+              ejercicio7No;
+              break;
+         case 10:cout<<"Ingrese el tamano del vector: ";
+              cin>>n;
+              ejercicio8No;
+              break;
+        case 11:cout<<"Ingrese el tamano del vector: ";
+              cin>>n;
+              ejercicio9No;
+              break;
+        default:
+              cout<<"Error";
+              break;
+        }
+    }while(opc!=0);
+    getch();
+    return(0);
+}
+
+void cargarVector(int vect[],int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        cout<<"vec["<<i<<"]: ";
+        cin>>vect[i];
+    }
+}
+
+void mostrarVector(int vect[],int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        cout<<"vec["<<i+1<<"]: "<<vec[i]<<endl;
+    }
+}
+
+void eliminarElem(int vect[],int &n,int elem)
+{
+    int i,k;
+    for(i=0;i<n;i++)
+    {
+        if(vect[i]==elem)
+        {
+            for(k=i;k<n-1;k++)
+            {
+                vect[k]=vect[k+1];
+            }
+            n--;
+        }
+    }
+}
+int frecuencia(int vect[],int n,int elem)
+{
+    int i,c=0;
+    for(i=0;i<n;i++)
+    {
+        if(vect[i]==elem)
+            c++;
+    }
+    return(c);
+}
+int busquedalineal(int vect[],int n,int elem){
+    int i;
+    for(i=0;i<n;i++){
+        if(vect[i]==elem){
+            return(i);
+        }
+    }
+    return (-1);
+}
+void invertir(int vect2[],int n){
+    int i,aux;
+    for(i=0;i<n/2;i++){
+        aux=vect2[i];
+        vect2[i]=vect2[n-1-i];
+        vect2[n-1-i]=aux;
+    }
+}
+void sumarvectores(int vect[],int vect2[],int vect3[],int n){
+    int i;
+    for(i=0;i<n;i++){
+            vect3[i]=vect[i]+vect2[i];
+    
+        }
+    
+}
+
+void ordenarVector (int vect[], int n){
+    int i,j,aux;
+    for(i=0;i<n-1;i++){
+        for(j=i;j<n;j++){
+            if(vect[i]>vect[j]){
+                aux=vect[i];
+                vect[i]=vect[j];
+                vect[j]=aux;
+            }
+        }
+    }
+}
+
+void posicion (int vect[], int &n,int num){
+    int i,j;
+    for(i=0;i<n;i++){
+        if(vect[i]>num){
+            for(j=n;j>=i;j--)
+                vect[j]=vect[j-1];
+            break;
+        
+        }
+    }
+    vect[i]=num;
+    n++;
+}
+
+void recorrer(int vect[],int n){
+    int i;
+    int aux=vect[0];
+    for(i=1;i<=n;i++){
+        vect[i-1]=vect[i];
+    }
+    vect[n-1]=aux;
+}
+
+void ejercicio7(int n){
+    int i,s=0,c=1,res;
+    for(i=1;c<=n;i++){
+        if(i%2!=0){
+            s=s+i;
+            res=invertir(s);
+            cout<<res<<", ";
+            c++;
+        }
+    }
+}
+
+int invertir(int n){
+    int d,nn=0;
+    while(n>0){
+        d=n%10;
+        nn=(nn*10)+d;
+        n=n/10;
+    }
+    return (nn);
+}
+
+void ejercicio8(int n){
+    int i,a=1,b=1,c;
+    cout<<a<<", "<<b<<", ";
+    for(i=2;i<n;i++){
+        c=a+b;
+        if(c<10){
+            cout<<c<<", ";
+            b=c;
+            a=c;
+        }
+        else{
+            cout<<c<<", ";
+            b=sumaDig(c);
+            a=c;
+        }
+    }
+}
+
+int sumaDig(int n){
+    int d,nn=0;
+    while(n>0){
+        d=n%10;
+        nn=nn+d;
+        n=n/10;
+    }
+    return (nn);
+}
+
+void ejercicio9(int n){
+    int i,a=1,b=1,c;
+    cout<<a<<", "<<b<<", ";
+    for(i=2;i<n;i++){
+        c=a+b;
+        if(c<10){
+            cout<<c<<", ";
+            b=c;
+            a=c;
+        }
+        else{
+            b=sumaDig(c);
+            cout<<b<<", ";
+            a=c;
+        }
+    }
+}
