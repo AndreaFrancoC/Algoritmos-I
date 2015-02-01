@@ -1,0 +1,43 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#define Max 50
+using namespace std;
+
+void cargarVector (int V[Max], int n);
+void recorrer(int V[Max], int n);
+void mostrarVector (int V[Max], int n);
+
+void main(){
+	int V[Max],n;
+	cout<<"Ingrese el tamano del vector: ";
+	cin>>n;
+	cargarVector(V,n);
+	mostrarVector(V,n);
+	recorrer(V,n);
+	cout<<endl;
+	mostrarVector(V,n);
+	getch();
+}
+
+void cargarVector (int V[], int n){
+	int i;
+	for(i=0;i<n;i++){
+		cout<<"Introduzca elementos: ";
+		cin>>V[i];
+	}
+}
+void recorrer(int V[],int n){
+	int i;
+	int aux=V[0];
+	for(i=1;i<=n;i++){
+		V[i-1]=V[i];
+	}
+	V[n-1]=aux;
+}
+void mostrarVector (int V[Max], int n){
+	int i;
+	for(i=0;i<n;i++){
+		cout<<V[i]<<"   ";
+	}
+}
