@@ -1,0 +1,132 @@
+#include<iostream>
+#include"conio.h"
+#define FIL 20
+#define COL 20
+
+using namespace std;
+
+void cargar(int mat[FIL][COL],int n,int m);
+void mostrar(int mat[FIL][COL],int n,int m);
+void transpuesta(int mat[FIL][COL],int &n,int &m);
+void suma(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s);
+void multiplicacion(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s);
+
+
+void main(){
+	int n,m,p,s,opc;
+	int mat[FIL][COL],mat2[FIL][COL],mat3[FIL][COL];
+	cout<<endl<<"ES NECESARIO QUE AMBAS MATRICES SEAN CUADRADAS Y DEL MISMO TAMANHO LA 1 DE LA 2";
+	cout<<endl<<"ingrese numero de filas de la primer matriz:";
+	cin>>n;
+	cout<<endl<<"ingrese numero de columnas de la primera matriz";
+	cin>>m;
+	cout<<endl<<"ingrese numero de filas de la segunda matriz:";
+	cin>>p;
+	cout<<endl<<"ingrese numero de columnas de la segunda matriz";
+	cin>>s;
+
+	do{
+		cout<< "*******MENU*******"<<endl;
+		cout<<"1.CARGAR UNA MATRIZ"<<endl;
+		cout<<"2.CARGAR SEGUNDA MATRIZ"<<endl;
+		cout<<"3.MOSTRAR LA MATRIZ"<<endl;
+		cout<<"4.MOSTRAR LA SEGUNDA MATRIZ"<<endl;
+		cout<<"5.MATRIZ TRANSPUESTA"<<endl;
+		cout<<"6.SUMA DE MATRICES"<<endl;
+		cout<<"7.MULTIPLICACION DE DOS MATRICES"<<endl;		
+		cout<<"ELIGA OPCION: "<<endl;
+		cin>>opc;
+		switch(opc){
+			case 1: 	
+				
+				cargar(mat,n,m);
+				break;
+			case 2:
+				
+				cargar(mat2,p,s);
+				break;
+			case 3: 
+				mostrar(mat,n,m);	
+				break;
+			case 4: 
+				mostrar(mat2,p,s);
+				break;
+			case 5:
+				cout<<"La transpuesta es.. \n";
+				transpuesta(mat,n,m);
+				mostrar(mat,n,m);
+				break;
+			case 6:
+				
+			    cout<<"cargar elementos para la primer matriz"<<endl;
+				cargar(mat,n,m);
+				cout<<"Elementos de la segunda matriz"<<endl;
+				cargar(mat2,p,s);
+				suma(mat,mat2,mat3,n,m,p,s);
+				mostrar(mat3,n,m);
+				break;
+			case 7:
+				cout<<"elementos para la primer matriz"<<endl;
+				cargar(mat,n,m);
+				cout<<"Elementos de la segunda matriz"<<endl;
+				cargar(mat2,p,s);
+				multiplicacion(mat,mat2,mat3,n,m,p,s);
+				mostrar(mat3,n,m);
+				break;
+			
+		}
+	}while(opc!=0);
+}
+
+void cargar(int mat[FIL][COL],int n,int m){
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			cout<<"Ingrese los elementos [ "<<i<<","<<j<<" ] ? : ";
+			cin>>mat[i][j];
+		}
+	}
+}
+void mostrar(int mat[FIL][COL],int n,int m){
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			cout<<mat[i][j]<<"    ";
+		}
+		cout<<endl;
+	}
+}
+void transpuesta(int mat[FIL][COL],int &n,int &m){
+	int i,j,aux;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			if(i<j){
+			aux       = mat[i][j];
+			mat[i][j] = mat[j][i];
+			mat[j][i] = aux;
+			}
+		}
+	}
+}
+void suma(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s){
+	int j,i,suma=0;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+		suma=mat[i][j]+mat2[i][j];
+		mat3[i][j]=suma;
+		}
+	suma=0;
+	}
+}
+void multiplicacion(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s){
+int j,k,i,pro=0;
+for(i=0;i<n;i++){
+	for(j=0;j<m;j++){
+		for(k=0;k<s;k++){
+		pro= pro+mat[i][k]*mat2[k][j];
+		mat3[i][j]=pro;
+		}
+	pro=0;
+	}
+  }
+}
