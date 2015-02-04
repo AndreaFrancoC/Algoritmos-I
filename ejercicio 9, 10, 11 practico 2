@@ -1,0 +1,108 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void ejercicio7(int n);
+void ejercicio8(int n);
+void ejercicio9(int n);
+int sumaDig(int n);
+int invertir(int n);
+
+void main(){
+	int n,op;
+	do{
+		cout<<endl<<"   -----MENU----"<<endl;
+		cout<<"1.Vector automtico 7"<<endl;
+		cout<<"2.Vector automtico 8"<<endl;
+		cout<<"3.Vector automtico 9"<<endl;
+		cin>>op;
+		switch(op){
+            case 1:cout<<"Ingrese el tamano del vector: ";
+			       cin>>n;
+			       ejercicio7(n);
+			       break;
+		    case 2:cout<<"Ingrese el tamano del vector: ";
+			       cin>>n;
+			       ejercicio8(n);
+			       break;
+		    case 3: cout<<"Ingrese el tamano del vector: ";
+			        cin>>n;
+			        ejercicio9(n);
+			        break;
+			default:
+                cout<<"Error";
+                break;
+		}
+	}while(op!=0);
+	getch();
+}
+
+void ejercicio7(int n){
+	int i,s=0,c=1,res;
+	for(i=1;c<=n;i++){
+		if(i%2!=0){
+			s=s+i;
+			res=invertir(s);
+			cout<<res<<", ";
+			c++;
+		}
+	}
+}
+
+int invertir(int n){
+	int d,nn=0;
+	while(n>0){
+		d=n%10;
+		nn=(nn*10)+d;
+		n=n/10;
+	}
+	return (nn);
+}
+
+void ejercicio8(int n){
+	int i,a=1,b=1,c;
+	cout<<a<<", "<<b<<", ";
+	for(i=2;i<n;i++){
+		c=a+b;
+		if(c<10){
+			cout<<c<<", ";
+			b=c;
+			a=c;
+		}
+		else{
+			cout<<c<<", ";
+			b=sumaDig(c);
+			a=c;
+		}
+	}
+}
+
+int sumaDig(int n){
+	int d,nn=0;
+	while(n>0){
+		d=n%10;
+		nn=nn+d;
+		n=n/10;
+	}
+	return (nn);
+}
+
+void ejercicio9(int n){
+	int i,a=1,b=1,c;
+	cout<<a<<", "<<b<<", ";
+	for(i=2;i<n;i++){
+		c=a+b;
+		if(c<10){
+			cout<<c<<", ";
+			b=c;
+			a=c;
+		}
+		else{
+			b=sumaDig(c);
+			cout<<b<<", ";
+			a=c;
+		}
+	}
+}
