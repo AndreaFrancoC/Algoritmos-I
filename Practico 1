@@ -1,0 +1,215 @@
+//Andrea Franco y Nicolas Nostas
+#include"stdafx.h"
+#include"conio.h"
+#include"math.h"
+#include"stdio.h"
+#include<iostream>
+#define PI 3.1416
+using namespace std;
+
+void numerosNaturales(int n);
+int multiplicacion(int n, int m);
+int suma(int n, int m);
+int resta(int n, int m);
+float volumen(float r);
+float ganancia(float h,float s);
+int sumarDigitos(int n);
+float cambioDeBase(float j,int n);
+int invertir(int n);     
+int eliminarPares (int n);
+
+void main(){
+	int op,m,a,b,res,n,base,i,g,c;
+	float h,s,j,t,r,n2,n1;
+	do{
+		cout<<"      ---  MENU   ---     "<<endl;
+		cout<<"1.Vol de una circunferenci"<<endl;
+		cout<<"2.80% de un salario al mes"<<endl;
+		cout<<"3.Horas/Minutos/Segundos"<<endl;
+		cout<<"4.Suma, resta, multiplicacion y division "<<endl;
+		cout<<"5.Suma de N numeros naturales"<<endl;
+		cout<<"6.Mostrar la serie: 2,6,10,14.."<<endl;
+		cout<<"7.Hallar la suma de los digitos de un  numero."<<endl;
+		cout<<"8.Cambio de un numero en base N a base decimal"<<endl;
+		cout<<"9.Introducir un numero para eliminar sus digitoa pares"<<endl;
+		cout<<"10.Invertir un numero natural"<<endl;
+		cout<<"0.Salir"<<endl;
+		cout<<"Ingrese una opcion: ";
+		cin>>op;
+		switch (op){
+			case 1:cout<<"ingrese el radio:";
+					cin>>r;
+					r=volumen(r);
+					cout<<"el volumen de la circunferencia es:"<<r;
+					break;
+			case 2:cout<<"Ingrese cantidad de horas trabajadas: "<<endl;
+				   cin>>h;
+				   cout<<"Ingrese el monto $ por hora trabajada: "<<endl;
+				   cin>>s;
+				   j=0,8*ganancia(h,s);
+				   cout<<"El 80% de su ganancia es de: "<<j<<endl;
+				   break;
+			case 3:do{
+				      do{
+				          cout<<"Ingrese hora: "<<endl;
+				          cin>>h;
+				         }while(h>24);
+			       }while(h<0);
+				   do{
+					   do{
+						   cout<<"Ingrese minutos: "<<endl;
+					       cin>>m;
+				         }while(m>60);
+				   }while(m<0);
+				   do{
+					   do{
+						   cout<<"Ingrese segundos: "<<endl;
+				           cin>>s;
+				        }while(s>60);
+					}while(s<0);
+				    if(h>12){
+					      cout<<"La hora es->   "<<h-12<<":"<<m<<":"<<s<<" PM"<<endl;
+				     }
+				    else{
+					      if(h==24){
+					              h=0;
+				            }
+					      cout<<"La hora es:"<<h<<":"<<m<<":"<<s<<" AM"<<endl;
+				     }
+				     break;
+			case 4:cout<<"Ingrese un numero entero: "<<endl;
+				   cin>>a;
+				   cout<<"Ingrese otro numero entero: "<<endl;
+				   cin>>b;
+				   g=suma(a,b);
+				   res=resta(a,b);
+				   m=multiplicacion(a,b);
+				   cout<<"La suma es: "<<g<<endl;
+				   cout<<"La resta es: "<<res<<endl;
+				   cout<<"La multiplicacion es: "<<m<<endl;
+				   break;
+			case 5:cout<<"Ingrese un numero para ver la suma de sus anteriores:"<<endl;
+				   cin>>n;
+				   numerosNaturales(n);
+				   break;
+		   case 6:cout<<"Ingrese la cantidad de elementos de la serie a mostrar: ";
+				  cin>>n;
+				  c=2;
+				  for (i=1;i<=n;i++){
+					  cout<<c<<",";
+					  c=c+4;
+				  }
+				  break;
+			case 7:cout<<"ingrese un numero para ver la suma de sus digitos: ";
+				  cin>>n;
+				  s=sumarDigitos(n);
+				  cout<<"la suma de los digitos es: "<<s;
+				  break;
+			case 8:cout<<"Ingrese la base del numero a convertir: "<<endl;
+				 cin>>base;
+				 cout<<"Ingrese el numero a convertir: "<<endl;
+				 cin>>n;
+				 cout<<"El numero en base 10 es :"<<cambioDeBase(base,n);
+				 break;
+			case 9:cout<<"Ingrese un numero: ";
+				 cin>>n;
+				 n1=eliminarPares(n);
+				 n2=invertir(n1);
+				 cout<<"El nuevo numero sin digitos pares es: "<<n2;
+				 break;
+			case 10:cout<<"Ingrese el numero para invertirlo: ";
+				 cin>>n;
+				 n1=invertir(n);
+				 cout<<"El numero invertido es: "<<n1;
+				 break;
+			case 0:cout<<"Salir"<<endl;
+				 break;
+			default:cout<<"Error!";
+				 break;
+		}
+	}while(op<0);
+	getch();
+}
+
+float volumen(float r)
+{float vo;
+	vo=(4*PI*r*r*r)/3;
+	return vo;
+}
+float ganancia(float h,float s){
+	float res=h*s;
+	return (res);
+}
+
+int suma(int n,int m){
+	int res;
+	res=n+m;
+	return(res);
+}
+
+int resta(int n,int m){
+	int res;
+	res=n-m;
+	return(res);
+}
+
+int multiplicacion(int n,int m){
+	int res;
+	res=n*m;
+	return(res);
+}
+
+void numerosNaturales(int n){
+	int res=0,i;
+	cout<<"La suma de los "<<n<<" primeros numeros naturales es: ";
+	for(i=1;i<=n;i++){
+		res=res+i;		
+	}
+	cout<<res;
+}
+
+int sumarDigitos(int n){
+	int d,sum;
+    sum = 0;
+    while( n>0){
+		d = n%10;
+	    n =n/10;
+	    sum = sum + d;
+	}
+	return sum;
+}
+
+float cambioDeBase(float j,int n){
+	int i=0,r,a;
+	float s=0;
+	while (n > 0){
+		r = n % 10;
+	    n = n/10;
+	    a = r*pow(j,i);
+	    s = s+a;
+	    i++;
+	}
+	return s;
+}
+
+int invertir(int n){
+	int r,ninv;
+    ninv = 0;
+	while (n>0){
+		r = n %10;
+	    n = n/10;
+	    ninv = ninv *10 + r;
+	}
+	return ninv;
+}
+
+int eliminarPares (int n){
+	int d,imp = 0;
+	while(n > 0){
+		d = n%10;
+	    n = n/10;
+	    if(d%2 != 0)
+	        imp = imp *10 + d;
+	}
+	return imp;
+}
