@@ -1,8 +1,10 @@
-#include <iostream>
-#include <iomanip>
-#include <stdio.h>
-#include "conio.h"
-#include <string>
+//Nicolas Nostas y Andrea Franco
+#include"stdafx.h"
+#include<iostream>
+#include<iomanip>
+#include<stdio.h>
+#include"conio.h"
+#include<string>
 using namespace std;
 
 struct r_usuario
