@@ -1,0 +1,104 @@
+//laboratorio 1
+//Andrea Franco y Nicolas Nostas
+#include"stdafx.h"
+#include<iostream>
+#include"conio.h"
+#include<string>
+using namespace std;
+
+void serieFibo(int n);
+void serieMenorFibo(int n);
+void valorMensaje(string cad);
+
+void main(){
+	int op,n;
+	string cad;
+	do{
+		cout<<endl<<"    ** MENU LABORATORIO 1 ** ";
+		cout<<endl<<"1.Mostrar N elementos de la serie fibo";
+		cout<<endl<<"2.Mostrar elementis menores a N de la serie fibo";
+		cout<<endl<<"3.Calcular el precio del mensaje";
+		cout<<endl<<"0.Salir";
+		cout<<endl<<"Ingrese una opcion: ";
+		cin>>op;
+		switch(op){
+			case 1: cout<<"Ingrese un numero entero: ";
+				    cin>>n;
+					serieFibo(n);
+					cout<<endl;
+					break;
+			case 2: cout<<"Ingrese un numero entero: ";
+				    cin>>n;
+					serieMenorFibo(n);
+					cout<<endl;
+					break;
+			case 3: cout<<"Introduzca mensaje: ";
+				    getline(cin,cad);
+					getline(cin,cad);
+					valorMensaje(cad);
+					getch();
+					cout<<endl;
+					break;
+			case 0: cout<<endl<<"Salir";
+				cout<<endl;    
+				break;
+			default: cout<<endl<<"Error";
+				     break;
+		}
+	}while(op!=0);
+	getch();
+}
+
+void serieFibo(int n){
+	int a=-1,b=1,fibo=0,i;
+	for(i=0;i<n;i++){
+		fibo=a+b;
+		a=b;
+		b=fibo;
+		cout<<fibo<<"   ";
+	}
+}
+
+void serieMenorFibo(int n){
+	int a=0,b=1,fibo,i;
+	fibo=a+b;
+	a=b;
+	b=fibo;
+	while (fibo<n){
+		cout<<fibo<<"   ";
+		fibo=a+b;
+		a=b;
+		b=fibo;
+	}
+}
+
+void valorMensaje(string cad){
+	int i,p=0,a=cad.length();
+	for(i=0;i<a;i++){
+		if((cad[i]>0)&&(cad[i]<32)){
+			p=p+30;
+		}
+		if(cad[i]==32 || cad[i]==255){
+			p=p;
+		}
+		if((cad[i]<97)&&(cad[i]>90)){
+			p=p+30;
+		}
+	    if((cad[i]<48)&&(cad[i]>32)){
+			p=p+30;
+		}
+		if((cad[i]<65)&&(cad[i]>57)){
+			p=p+30;
+		}
+	    if((cad[i]<254)&&(cad[i]>122)){
+			p=p+30;
+		}
+	    if((cad[i]<123)&&(cad[i]>96)){
+			p=p+10;
+		}
+	    if((cad[i]<58)&&(cad[i]>47)){
+			p=p+20;
+		}
+	}
+	cout<<"Debera pagar "<<p<<" bs.";
+}
