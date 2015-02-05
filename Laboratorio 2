@@ -1,0 +1,146 @@
+#include<stdafx.h>
+#include<conio.h>
+#include "string"
+
+#include"iostream"
+#define tam 30
+using namespace std;
+
+void cargarMatriz(int mat[tam][tam],int n);
+void calcularPromDiagPrinc(int mat[tam][tam],int n);
+void cargarEspiral(int n);
+void agregarProducto();
+void listarProducto();
+void mostrarMatriz(int mat[tam][tam],int n);
+struct Venta
+{
+	int id;
+	string nombre;
+	int precio;
+	int costo;
+	int cantidad;
+
+};
+
+void main(){
+	int op,n,mat[tam][tam];
+	do{
+		cout<<endl<<"     ***  Menu  ***";
+		cout<<endl<<"1. Promedio diagonal principal";
+		cout<<endl<<"2. Cargar en espiral";
+		cout<<endl<<"3. Reporte de una venta";
+		cout<<endl<<"0. Salir";
+		cout<<endl<<"Ingrese una opcion: ";
+		cin>>op;
+		switch(op){
+			case 1: cout<<"Ingrese el tamanho de la matriz:";
+				    cin>>n;
+					cargarMatriz(mat,n);
+					calcularPromDiagPrinc(mat,n);
+					cout<<endl;
+					break;
+			case 2: cout<<"Ingrese el tamanho de la matriz:";
+				    cin>>n;
+					cargarEspiral(n);
+					mostrarMatriz(mat,n);
+					cout<<endl;
+					break;
+			case 3: agregarProducto();
+				    listarProducto();
+				    break;
+			case 0: cout<<endl<<"Salir";
+				    break;
+			default:cout<<endl<<"Error";
+				    break;
+		}
+	}while(op!=0);
+	getch();
+}
+
+void cargarMatriz(int mat[tam][tam],int n){
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			cout<<"Ingrese elemento: ";
+		    cin>>mat[i][j];
+		}
+		cout<<endl;
+	}
+}
+
+void calcularPromDiagPrinc(int mat[tam][tam],int n){
+	int s=0,i,j;
+	float prom;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			if(i==j){
+				s=s+mat[i][j];
+			}
+		}
+	}
+	prom=s/n;
+	cout<<"el promedio de la diagonal principal es: "<<prom;
+}
+
+void cargarEspiral(int n){
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+		}
+	}
+}
+
+void mostrarMatriz(int mat[tam][tam],int n){
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			cout<<mat[i][j]<<"   ";
+		}
+		cout<<endl;
+	}
+}
+void agregarProducto()
+{
+	Venta reg;
+	FILE *ptr;
+	ptr=fopen("Producto.dat","rb");
+	if(ptr==NULL)
+	{
+		cout<<"el archivo no existe";
+		ptr=fopen("Producto.dat","wb");
+		fclose(ptr);
+	}
+	else
+	{   
+		fclose(ptr);
+		ptr=fopen("Producto.dat","ab");
+		cout<<"Ingresa id: ";
+	    cin>>reg.id;
+		cout<<"Ingresar nombre: ";
+	    getline(cin,reg.nombre);
+	    getline(cin,reg.nombre);
+		cout<<"Ingresar precio: ";
+	    cin>>reg.precio;
+		cout<<"Ingresar costo: ";
+	    cin>>reg.costo;
+		cout<<"Ingresar cantidad: ";
+	    cin>>reg.cantidad;
+		fwrite(&reg,sizeof(reg),1,ptr);
+        fclose(ptr);
+	}
+}
+void listarProducto()
+{
+	Venta reg;
+	FILE *ptr;
+	ptr=fopen("Producto.dat","rb");
+	cout<<endl<<"        ***  REPORTE VENTA  ***";
+	cout<<endl<<"Id    	Nombre	     Precio	  Cantidad     Total";
+	fread(&reg,sizeof(reg),1,ptr);
+	while(!feof(ptr))
+	 {
+		 cout<<endl<<reg.id<<"	"<<reg.nombre<<"    	"<<reg.precio<<"	      "<<reg.cantidad<<"           "<<reg.cantidad*reg.precio;
+	    fread(&reg,sizeof(reg),1,ptr);
+	 }
+	fclose(ptr);
+}
