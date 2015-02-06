@@ -9,7 +9,7 @@ using namespace std;
 
 void cargarMatriz(int mat[tam][tam],int n);
 void calcularPromDiagPrinc(int mat[tam][tam],int n);
-void cargarEspiral(int n);
+void cargarEspiral(int mat[tam][tam],int n);
 void agregarProducto();
 void listarProducto();
 void mostrarMatriz(int mat[tam][tam],int n);
@@ -42,7 +42,7 @@ void main(){
 					break;
 			case 2: cout<<"Ingrese el tamanho de la matriz:";
 				    cin>>n;
-					cargarEspiral(n);
+					cargarEspiral(mat,n);
 					mostrarMatriz(mat,n);
 					cout<<endl;
 					break;
@@ -83,11 +83,29 @@ void calcularPromDiagPrinc(int mat[tam][tam],int n){
 	cout<<"el promedio de la diagonal principal es: "<<prom;
 }
 
-void cargarEspiral(int n){
-	int i,j;
-	for(i=0;i<n;i++){
-		for(j=0;j<n;j++){
+void cargarEspiral(int mat[tam][tam],int n){
+	int i,j,c=1;
+	for (i=0;i<n/2;i++){
+		for (j=i;j<n-i;j++){
+			mat[i][j]=c;
+			c++;
 		}
+		for (j=i;j<n-1-i;j++){
+			mat[j+1][n-1-i]= c;
+			c++;
+		}
+		c--;
+		for (j=n-1-i;j>i;j--){
+			mat[n-1-i][j]=c;
+			c++;
+		}
+		for (j=n-1-i;j>i;j--){
+			mat[j][i]=c;
+			c++;
+		}
+	}
+	if (n%2!=0){
+		mat[n/2][n/2]=n*n;
 	}
 }
 
